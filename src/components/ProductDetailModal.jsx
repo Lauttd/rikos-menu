@@ -1,0 +1,352 @@
+import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { productBebidas, productExtras, deliveryMethods } from "../data/orderOptions";
+import ProductImage from "./ProductImage";
+
+function formatArs(value) {
+  return `$${value.toLocaleString("es-AR")}`;
+}
+
+export default function ProductDetailModal({ product, onClose, whatsappNumber }) {
+  const soldOut = product.inStock === false;
+  const [bebidaIds, setBebidaIds] = useState(() => new Set());
+  const [extraIds, setExtraIds] = useState(() => new Set());
+  const [delivery, setDelivery] = useState("pickup");
+  const [tableNumber, setTableNumber] = useState("");
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  const ingredients = product.ingredients?.length ? product.ingredients : [product.desc];
+
+  const extrasTotal = useMemo(() => {
+    let sum = 0;
+    productExtras.forEach((ex) => {
+      if (extraIds.has(ex.id)) sum += ex.price;
+    });
+    productBebidas.forEach((b) => {
+      if (bebidaIds.has(b.id)) sum += b.price;
+    });
+    return sum;
+  }, [extraIds, bebidaIds]);
+
+  const shippingCost = 0;
+
+  const grandTotal = product.price + extrasTotal + shippingCost;
+
+  const selectedBebidasLabels = productBebidas.filter((b) => bebidaIds.has(b.id));
+  const selectedExtrasLabels = productExtras.filter((ex) => extraIds.has(ex.id));
+
+  const bebidasLine =
+    selectedBebidasLabels.length > 0
+      ? selectedBebidasLabels.map((b) => `${b.label.trim()} (${formatArs(b.price)})`).join(", ")
+      : "Ninguna";
+
+  const extrasLine =
+    selectedExtrasLabels.length > 0
+      ? selectedExtrasLabels.map((e) => `${e.label.trim()} (${formatArs(e.price)})`).join(", ")
+      : "Ninguno";
+
+  const canConfirm = !soldOut && (delivery === "delivery" || tableNumber.trim() !== "");
+
+  const confirmWhatsApp = () => {
+    if (!canConfirm) return;
+    const lines = [
+      `*NUEVO PEDIDO — Riko's*`,
+      `----------------------------------`,
+      `*Producto:* ${product.name} (${formatArs(product.price)})`,
+      `*Ingredientes:* ${ingredients.join(", ")}`,
+      `*Bebidas extra:* ${bebidasLine}`,
+      `*Papas extra:* ${extrasLine}`,
+      delivery === "pickup"
+        ? `*Método de Entrega:* Retiro en el local (Mesa N° ${tableNumber.trim()})`
+        : `*Método de Entrega:* Envío a domicilio`,
+      `----------------------------------`,
+      `*TOTAL A PAGAR:* ${formatArs(grandTotal)}`,
+    ];
+    const text = lines.join("\n");
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+    onClose();
+  };
+
+  const toggleBebida = (id) => {
+    setBebidaIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleExtra = (id) => {
+    setExtraIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  return (
+    <motion.div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="product-detail-title"
+      className="fixed inset-0 z-[400] flex items-end sm:items-center justify-center p-0 sm:p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      <motion.button
+        type="button"
+        aria-label="Cerrar"
+        title="Cerrar"
+        className="absolute inset-0 bg-black/45 backdrop-blur-md cursor-pointer border-none p-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      />
+
+      <motion.div
+        className="relative z-[401] w-full max-w-[min(520px,100vw)] max-h-[min(92vh,840px)] flex flex-col bg-bg rounded-t-[22px] sm:rounded-2xl shadow-[0_-8px_40px_rgba(0,0,0,0.18)] sm:shadow-[0_20px_60px_rgba(0,0,0,0.25)] overflow-hidden border border-black/[0.06]"
+        initial={{ opacity: 0, scale: 0.9, y: 28 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.94, y: 20 }}
+        transition={{ type: "spring", damping: 26, stiffness: 320 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative shrink-0 aspect-[16/10] bg-bg-card overflow-hidden">
+          <ProductImage src={product.img} alt={product.name} className="w-full h-full object-cover" />
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-3 right-3 w-11 h-11 rounded-full bg-white/92 backdrop-blur-sm border-none shadow-md text-dark text-xl font-bold cursor-pointer flex items-center justify-center active:scale-95 z-[402]"
+            aria-label="Cerrar"
+          >
+            ×
+          </button>
+          {soldOut && (
+            <span className="pointer-events-none absolute inset-x-4 bottom-4 rounded-xl bg-black/72 backdrop-blur-sm text-white text-center text-[13px] font-black uppercase tracking-wide py-2.5 px-3 shadow-lg">
+              Stock agotado
+            </span>
+          )}
+          {product.badge && (
+            <span className="absolute top-3 left-3 bg-white/92 backdrop-blur-[4px] rounded-full py-1.5 px-3 text-[12px] font-bold text-dark shadow-sm">
+              {product.badge}
+            </span>
+          )}
+        </div>
+
+        <div className="flex-1 overflow-y-auto overscroll-contain px-4 pt-4 pb-[calc(env(safe-area-inset-bottom)+20px)] sm:pb-6">
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <h2
+              id="product-detail-title"
+              className="font-playfair text-[1.35rem] sm:text-[1.55rem] font-extrabold text-dark leading-tight m-0"
+            >
+              {product.name}
+            </h2>
+            <p className="m-0 shrink-0 text-[1.35rem] font-extrabold text-brand font-playfair whitespace-nowrap">
+              {formatArs(product.price)}
+            </p>
+          </div>
+
+          <p className="text-[14px] text-[#666] leading-relaxed mb-5">{product.desc}</p>
+
+          {soldOut && (
+            <div className="mb-5 rounded-2xl border-2 border-[#ccc] bg-white px-4 py-3 text-center">
+              <p className="m-0 text-[15px] font-bold text-dark">Momentáneamente sin stock</p>
+              <p className="m-0 mt-1 text-[13px] text-[#777] leading-snug">
+                Podés mirar ingredientes del producto. Cuando volvamos a tener unidades, el botón de pedido por WhatsApp se habilitará.
+              </p>
+            </div>
+          )}
+
+          <section className="mb-5">
+            <h3 className="text-[13px] font-bold uppercase tracking-wide text-brand mb-2.5">
+              Ingredientes
+            </h3>
+            <ul className="list-disc pl-5 text-[15px] text-dark space-y-1.5 m-0">
+                {ingredients.map((item, idx) => (
+                  <li key={`${idx}-${item}`}>{item}</li>
+                ))}
+              </ul>
+          </section>
+
+          <fieldset disabled={soldOut} className="border-none min-w-0 p-0 m-0 mb-5">
+            <h3 className="text-[13px] font-bold uppercase tracking-wide text-brand mb-2.5">
+              Bebidas
+            </h3>
+            <div className="flex flex-col gap-2 max-h-[220px] overflow-y-auto pr-1 border border-black/[0.06] rounded-2xl p-2 bg-bg-card animate-scroll">
+              {productBebidas.map((b) => {
+                const checked = bebidaIds.has(b.id);
+                return (
+                  <label
+                    key={b.id}
+                    className={`flex items-center justify-between gap-3 min-h-[46px] px-3 py-2 rounded-xl border-2 transition-colors ${
+                      soldOut
+                        ? "cursor-not-allowed opacity-55 border-black/[0.06] bg-bg-card"
+                        : `cursor-pointer ${
+                            checked
+                              ? "border-brand bg-brand/[0.08] bg-white"
+                              : "border-black/[0.04] bg-white active:bg-bg-card"
+                          }`
+                    }`}
+                  >
+                    <span className="flex items-center gap-2.5 min-w-0">
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleBebida(b.id)}
+                        className="w-4.5 h-4.5 shrink-0 accent-brand rounded"
+                      />
+                      <span className="text-[13.5px] font-semibold text-dark truncate">{b.label}</span>
+                    </span>
+                    <span className="text-[13px] font-bold text-brand shrink-0">{formatArs(b.price)}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
+
+          <fieldset disabled={soldOut} className="border-none min-w-0 p-0 m-0 mb-5">
+            <h3 className="text-[13px] font-bold uppercase tracking-wide text-brand mb-2.5">
+              Extras (Papas)
+            </h3>
+            <div className="flex flex-col gap-2">
+              {productExtras.map((ex) => {
+                const checked = extraIds.has(ex.id);
+                return (
+                  <label
+                    key={ex.id}
+                    className={`flex items-center justify-between gap-3 min-h-[46px] px-4 py-2.5 rounded-2xl border-2 transition-colors ${
+                      soldOut
+                        ? "cursor-not-allowed opacity-55 border-black/[0.06] bg-bg-card"
+                        : `cursor-pointer ${
+                            checked
+                              ? "border-brand bg-brand/[0.08]"
+                              : "border-black/[0.08] bg-white active:bg-bg-card"
+                          }`
+                    }`}
+                  >
+                    <span className="flex items-center gap-3 min-w-0">
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleExtra(ex.id)}
+                        className="w-5 h-5 shrink-0 accent-brand rounded"
+                      />
+                      <span className="text-[14px] font-semibold text-dark truncate">{ex.label}</span>
+                    </span>
+                    <span className="text-[13.5px] font-bold text-brand shrink-0">{formatArs(ex.price)}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
+
+          <fieldset disabled={soldOut} className="border-none min-w-0 p-0 m-0 mb-6">
+            <h3 className="text-[13px] font-bold uppercase tracking-wide text-brand mb-2.5">
+              Método de entrega
+            </h3>
+            <div className="flex gap-2">
+              {deliveryMethods.map((m) => (
+                <label
+                  key={m.id}
+                  className={`flex-1 flex items-center gap-3 min-h-[52px] px-4 rounded-2xl border-2 ${
+                    soldOut ? "cursor-not-allowed opacity-55" : "cursor-pointer"
+                  } ${
+                    delivery === m.id
+                      ? "border-brand bg-brand/[0.08]"
+                      : "border-black/[0.08] bg-white"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name={`delivery-method-${product.id}`}
+                    className="w-5 h-5 accent-brand shrink-0"
+                    checked={delivery === m.id}
+                    onChange={() => setDelivery(m.id)}
+                  />
+                  <span className="text-[14px] font-semibold text-dark leading-tight">
+                    {m.id === "pickup" ? "🏠" : "🛵"} {m.label}
+                  </span>
+                </label>
+              ))}
+            </div>
+            {delivery === "delivery" && (
+              <p className="mt-2 text-[12px] text-[#888] px-1">
+                📍 El costo de envío se coordina por WhatsApp según tu ubicación.
+              </p>
+            )}
+            {delivery === "pickup" && (
+              <div className="mt-3">
+                <label className="block text-[13px] font-semibold text-[#555] mb-1.5 px-1">
+                  Número de Mesa <span className="text-brand">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Ej: 5 o 12"
+                  value={tableNumber}
+                  onChange={(e) => setTableNumber(e.target.value)}
+                  className="w-full h-11 px-4 rounded-xl border border-black/[0.12] bg-white text-[15px] focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand font-medium placeholder:text-[#aaa]"
+                  required
+                />
+                <p className="mt-1.5 text-[11px] text-[#777] px-1">
+                  ⚠️ Obligatorio para poder confirmar tu pedido e identificar tu mesa en el local.
+                </p>
+              </div>
+            )}
+          </fieldset>
+
+          <div className="sticky bottom-0 -mx-4 px-4 pt-3 pb-2 bg-gradient-to-t from-bg from-85% to-transparent">
+            <div className="flex items-center justify-between mb-3 px-1">
+              <span className="text-[14px] font-bold text-[#555] uppercase tracking-wide">
+                {soldOut ? "Precio (referencia)" : "Total"}
+              </span>
+              <motion.span
+                key={soldOut ? "out" : grandTotal}
+                className={`text-[1.65rem] font-extrabold font-playfair ${soldOut ? "text-[#777]" : "text-dark"}`}
+                initial={{ scale: 0.96 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 500, damping: 28 }}
+              >
+                {formatArs(soldOut ? product.price : grandTotal)}
+              </motion.span>
+            </div>
+
+            <button
+              type="button"
+              disabled={!canConfirm}
+              onClick={confirmWhatsApp}
+              className={`w-full min-h-[54px] border-none rounded-2xl text-[17px] font-bold transition-all duration-200 ${
+                !canConfirm
+                  ? "bg-[#d6d6d6] text-[#888] cursor-not-allowed shadow-none active:scale-100"
+                  : "brand-gradient text-white cursor-pointer shadow-[0_8px_24px_rgba(255,75,31,0.4)] active:scale-[0.98]"
+              }`}
+            >
+              {soldOut
+                ? "No disponible — sin stock"
+                : delivery === "pickup" && tableNumber.trim() === ""
+                ? "Ingresa tu número de mesa"
+                : "Confirmar Pedido por WhatsApp"}
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}

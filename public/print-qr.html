@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprimir QR de Menú - BurgerCraft</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+        .print-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+        }
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: #ea580c; /* Orange color */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .qr-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border: 4px solid #f3f4f6;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        .instructions {
+            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 32px;
+        }
+        .print-button {
+            background-color: #ea580c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .print-button:hover {
+            background-color: #c2410c;
+        }
+        @media print {
+            body {
+                background-color: white;
+                justify-content: flex-start;
+                padding-top: 50px;
+            }
+            .print-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-container">
+        <div class="logo-text">BurgerCraft</div>
+        <img src="/qr-menu.png" alt="QR del Menú" class="qr-image">
+        <div class="instructions">
+            <strong>Escaneá el código QR</strong><br>
+            para ver nuestro menú digital
+        </div>
+        <button class="print-button" onclick="window.print()">Imprimir Código QR</button>
+    </div>
+</body>
+</html>
