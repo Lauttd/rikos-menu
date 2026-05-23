@@ -9,8 +9,9 @@ function formatArs(value) {
 
 export default function ProductDetailModal({ product, onClose, whatsappNumber }) {
   const soldOut = product.inStock === false;
-  const [bebidaIds, setBebidaIds] = useState(() => new Set());
-  const [extraIds, setExtraIds] = useState(() => new Set());
+  const [bebidaCounts, setBebidaCounts] = useState(() => ({}));
+  const [extraCounts, setExtraCounts] = useState(() => ({}));
+  const [productQty, setProductQty] = useState(1);
   const [delivery, setDelivery] = useState("pickup");
   const [tableNumber, setTableNumber] = useState("");
 
@@ -34,39 +35,45 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
   const extrasTotal = useMemo(() => {
     let sum = 0;
     productExtras.forEach((ex) => {
-      if (extraIds.has(ex.id)) sum += ex.price;
+      const count = extraCounts[ex.id] || 0;
+      if (count > 0) sum += ex.price * count;
     });
     productBebidas.forEach((b) => {
-      if (bebidaIds.has(b.id)) sum += b.price;
+      const count = bebidaCounts[b.id] || 0;
+      if (count > 0) sum += b.price * count;
     });
     return sum;
-  }, [extraIds, bebidaIds]);
+  }, [extraCounts, bebidaCounts, product, productQty]);
 
   const shippingCost = 0;
 
-  const grandTotal = product.price + extrasTotal + shippingCost;
+  const grandTotal = product.price * Math.max(1, productQty) + extrasTotal + shippingCost;
 
-  const selectedBebidasLabels = productBebidas.filter((b) => bebidaIds.has(b.id));
-  const selectedExtrasLabels = productExtras.filter((ex) => extraIds.has(ex.id));
+  const selectedBebidasLabels = productBebidas.filter((b) => (bebidaCounts[b.id] || 0) > 0);
+  const selectedExtrasLabels = productExtras.filter((ex) => (extraCounts[ex.id] || 0) > 0);
 
   const bebidasLine =
     selectedBebidasLabels.length > 0
-      ? selectedBebidasLabels.map((b) => `${b.label.trim()} (${formatArs(b.price)})`).join(", ")
+      ? selectedBebidasLabels
+          .map((b) => `${(bebidaCounts[b.id] || 0)}x ${b.label.trim()} (${formatArs(b.price)})`)
+          .join(", ")
       : "Ninguna";
 
   const extrasLine =
     selectedExtrasLabels.length > 0
-      ? selectedExtrasLabels.map((e) => `${e.label.trim()} (${formatArs(e.price)})`).join(", ")
+      ? selectedExtrasLabels
+          .map((e) => `${(extraCounts[e.id] || 0)}x ${e.label.trim()} (${formatArs(e.price)})`)
+          .join(", ")
       : "Ninguno";
 
-  const canConfirm = !soldOut && (delivery === "delivery" || tableNumber.trim() !== "");
+  const canConfirm = !soldOut && (delivery === "delivery" || tableNumber.trim() !== "") && productQty > 0;
 
   const confirmWhatsApp = () => {
     if (!canConfirm) return;
     const lines = [
       `*NUEVO PEDIDO — Riko's*`,
       `----------------------------------`,
-      `*Producto:* ${product.name} (${formatArs(product.price)})`,
+      `*Producto:* ${productQty}x ${product.name} (${formatArs(product.price)})`,
       `*Ingredientes:* ${ingredients.join(", ")}`,
       `*Bebidas extra:* ${bebidasLine}`,
       `*Papas extra:* ${extrasLine}`,
@@ -81,20 +88,24 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
     onClose();
   };
 
-  const toggleBebida = (id) => {
-    setBebidaIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
+  const incBebida = (id) => {
+    setBebidaCounts((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+  };
+  const decBebida = (id) => {
+    setBebidaCounts((prev) => {
+      const next = { ...prev };
+      next[id] = Math.max(0, (next[id] || 0) - 1);
       return next;
     });
   };
 
-  const toggleExtra = (id) => {
-    setExtraIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
+  const incExtra = (id) => {
+    setExtraCounts((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+  };
+  const decExtra = (id) => {
+    setExtraCounts((prev) => {
+      const next = { ...prev };
+      next[id] = Math.max(0, (next[id] || 0) - 1);
       return next;
     });
   };
@@ -152,13 +163,36 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
         </div>
 
         <div className="flex-1 overflow-y-auto overscroll-contain px-4 pt-4 pb-[calc(env(safe-area-inset-bottom)+26px)] sm:px-5 sm:pt-5 sm:pb-6">
-          <div className="flex items-start justify-between gap-3 mb-3">
-            <h2
-              id="product-detail-title"
-              className="font-playfair text-[1.05rem] sm:text-[1.25rem] font-extrabold text-dark leading-tight m-0"
-            >
-              {product.name}
-            </h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3">
+            <div className="flex items-center gap-3 w-full">
+              <h2
+                id="product-detail-title"
+                className="font-playfair text-[1.05rem] sm:text-[1.25rem] font-extrabold text-dark leading-tight m-0"
+              >
+                {product.name}
+              </h2>
+              <div className="ml-3">
+                <div className="inline-flex items-center gap-2 bg-white rounded-xl border border-black/[0.06] px-2 py-1">
+                  <button
+                    type="button"
+                    onClick={() => setProductQty((q) => Math.max(1, q - 1))}
+                    disabled={soldOut}
+                    className="w-7 h-7 flex items-center justify-center rounded text-dark"
+                  >
+                    −
+                  </button>
+                  <span className="w-7 text-center font-medium">{productQty}</span>
+                  <button
+                    type="button"
+                    onClick={() => setProductQty((q) => q + 1)}
+                    disabled={soldOut}
+                    className="w-7 h-7 flex items-center justify-center rounded text-dark"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
             <p className="m-0 shrink-0 text-[1.05rem] font-extrabold text-brand font-playfair whitespace-nowrap">
               {formatArs(product.price)}
             </p>
@@ -192,31 +226,42 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
             </h3>
             <div className="flex flex-col gap-2 max-h-[220px] overflow-y-auto pr-1 border border-black/[0.06] rounded-2xl p-2 bg-bg-card animate-scroll">
               {productBebidas.map((b) => {
-                const checked = bebidaIds.has(b.id);
+                const count = bebidaCounts[b.id] || 0;
                 return (
-                  <label
+                  <div
                     key={b.id}
                     className={`flex items-center justify-between gap-3 min-h-[48px] px-4 py-3 rounded-2xl border-2 transition-colors duration-200 ${
                       soldOut
                         ? "cursor-not-allowed opacity-55 border-black/[0.06] bg-bg-card"
-                        : `cursor-pointer ${
-                            checked
-                              ? "border-brand bg-brand/[0.08] bg-white"
-                              : "border-black/[0.04] bg-white hover:border-brand hover:bg-brand/[0.04]"
-                          }`
+                        : count > 0
+                        ? "border-brand bg-brand/[0.08] bg-white"
+                        : "border-black/[0.04] bg-white hover:border-brand hover:bg-brand/[0.04]"
                     }`}
                   >
-                    <span className="flex items-center gap-2.5 min-w-0">
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={() => toggleBebida(b.id)}
-                        className="w-4.5 h-4.5 shrink-0 accent-brand rounded"
-                      />
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="inline-flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => decBebida(b.id)}
+                          disabled={soldOut || count === 0}
+                          className="w-8 h-8 rounded bg-white border text-dark flex items-center justify-center"
+                        >
+                          −
+                        </button>
+                        <span className="w-8 text-center font-medium">{count}</span>
+                        <button
+                          type="button"
+                          onClick={() => incBebida(b.id)}
+                          disabled={soldOut}
+                          className="w-8 h-8 rounded bg-white border text-dark flex items-center justify-center"
+                        >
+                          +
+                        </button>
+                      </div>
                       <span className="text-[13px] font-semibold text-dark truncate">{b.label}</span>
-                    </span>
-                    <span className="text-[12.5px] font-bold text-brand shrink-0">{formatArs(b.price)}</span>
-                  </label>
+                    </div>
+                    <span className="text-[13px] font-bold text-brand shrink-0">{formatArs(b.price)}</span>
+                  </div>
                 );
               })}
             </div>
@@ -228,31 +273,42 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
             </h3>
             <div className="flex flex-col gap-2">
               {productExtras.map((ex) => {
-                const checked = extraIds.has(ex.id);
+                const count = extraCounts[ex.id] || 0;
                 return (
-                  <label
+                  <div
                     key={ex.id}
                     className={`flex items-center justify-between gap-3 min-h-[48px] px-4 py-3 rounded-2xl border-2 transition-colors duration-200 ${
                       soldOut
                         ? "cursor-not-allowed opacity-55 border-black/[0.06] bg-bg-card"
-                        : `cursor-pointer ${
-                            checked
-                              ? "border-brand bg-brand/[0.08]"
-                              : "border-black/[0.08] bg-white hover:border-brand hover:bg-brand/[0.04]"
-                          }`
+                        : count > 0
+                        ? "border-brand bg-brand/[0.08]"
+                        : "border-black/[0.08] bg-white hover:border-brand hover:bg-brand/[0.04]"
                     }`}
                   >
-                    <span className="flex items-center gap-3 min-w-0">
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={() => toggleExtra(ex.id)}
-                        className="w-5 h-5 shrink-0 accent-brand rounded"
-                      />
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="inline-flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => decExtra(ex.id)}
+                          disabled={soldOut || count === 0}
+                          className="w-8 h-8 rounded bg-white border text-dark flex items-center justify-center"
+                        >
+                          −
+                        </button>
+                        <span className="w-8 text-center font-medium">{count}</span>
+                        <button
+                          type="button"
+                          onClick={() => incExtra(ex.id)}
+                          disabled={soldOut}
+                          className="w-8 h-8 rounded bg-white border text-dark flex items-center justify-center"
+                        >
+                          +
+                        </button>
+                      </div>
                       <span className="text-[13px] font-semibold text-dark truncate">{ex.label}</span>
-                    </span>
-                    <span className="text-[12.5px] font-bold text-brand shrink-0">{formatArs(ex.price)}</span>
-                  </label>
+                    </div>
+                    <span className="text-[13.5px] font-bold text-brand shrink-0">{formatArs(ex.price)}</span>
+                  </div>
                 );
               })}
             </div>
