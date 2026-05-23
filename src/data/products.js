@@ -55,7 +55,7 @@ export const products = [
     price: 9000,
     desc: "Lomito, pollo, repollo, tomate, zanahoria y salsa de ajo",
     ingredients: ["Lomito", "Pollo", "Repollo", "Tomate", "Zanahoria", "Salsa de ajo"],
-    img: "https://scontent.ffma3-1.fna.fbcdn.net/v/t39.84726-6/699416522_873966089042492_6212098002564806956_n.jpg?stp=dst-jpg_p720x720_tt6&_nc_cat=101&ccb=1-7&_nc_sid=92e707&_nc_eui2=AeGn2aEQgArWfs5VVd4rMV0akey9-DQepvv4xD34NB6m-_lGH57BxrrGAcWGnvXrGHeTZWpefoaAp5M0Atg7F-gdN&_nc_ohc=PK6U5UKiEAYQ7kNvwGB-Ggz&_nc_oc=AdqMC7UFhZHLM1yqS9XpdaMfO3jtEclkSdJba_NcDKqm5a4I-uFRokFxhUhbWUKYGFM&_nc_zt=14&_nc_ht=scontent.ffma3-1.fna&_nc_gid=pymxAIvjpH0rZs2iVLyw-Q&_nc_ss=7b2a8&oh=00_Af7XYUfBs7Leg441U2Az57JY3Rx9KiwPhOycQslc1yzAcA&oe=6A13C61F",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf3UGoxlCHbzEcJfdWkZZ0BV4zOCjQHv2ZFg&s",
     badge: "🌟 Especial",
   },
   {
@@ -98,7 +98,7 @@ export const products = [
     price: 13000,
     desc: "Lomito jugoso, tomate y lechuga",
     ingredients: ["Lomito", "Tomate", "Lechuga"],
-    img: "https://alicante.com.ar/receta/74-receta-sandwich-de-lomito-caliente/",
+    img: "https://circuitogastronomico.com/wp-content/uploads/2024/07/3.jpg",
   },
   {
     id: 9,
@@ -107,7 +107,7 @@ export const products = [
     price: 15000,
     desc: "Lomito, tomate, lechuga, jamón, queso y huevo",
     ingredients: ["Lomito de carne", "Tomate", "Lechuga", "Jamón", "Queso", "Huevo"],
-    img: "https://images.pexels.com/photos/6210882/pexels-photo-6210882.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPbF9YpPHuRHyMqOWeK9swLXpMzqRrQI8_w&s",
     badge: "⭐ Completo",
   },
 
@@ -126,9 +126,9 @@ export const products = [
     category: "papas",
     name: "SalchiPapas",
     price: 8000,
-    desc: "Papas fritas con rodajas de salchicha mixta",
+    desc: "Papas fritas con rodajas de salchicha",
     ingredients: ["Papas fritas", "Salchicha mixta en rodajas", "Sal"],
-    img: "https://images.pexels.com/photos/4109111/pexels-photo-4109111.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfuyvWlvrNFWZi00MP96vcB2SEtrInaPY_Dw&s",
     badge: "🔥 Favorita",
   },
   {
@@ -138,7 +138,7 @@ export const products = [
     price: 8000,
     desc: "Papas con cheddar, bacon o muzza gratinados",
     ingredients: ["Papas fritas", "Cheddar / Bacon / Muzzarella (a elección)"],
-    img: "https://images.pexels.com/photos/5835353/pexels-photo-5835353.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://scontent.ffma3-1.fna.fbcdn.net/v/t39.84726-6/651398678_761476053493760_6427530649057591734_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=92e707&_nc_eui2=AeHp7eAEEih7cYgFWldrZuOk10Pn28KPKOrXQ-fbwo8o6l1FBUc6nItU-yL6EaxM_zHJo6b8bB2BucdDcYWm8hyX&_nc_ohc=_gRKBNsiEAIQ7kNvwHjA56U&_nc_oc=AdrBos8q4XzkZmy-fcJ0V_AwT98H6LjbS6Re1ek4rJSM5tjVNNwxqbXDbzhEsXjfOt8&_nc_zt=14&_nc_ht=scontent.ffma3-1.fna&_nc_gid=HwE27Va0RJWP_30GFc1crA&_nc_ss=7b2a8&oh=00_Af6HlFE9VreSahoZlGFoVxteIXGhhN7QUHXbXG5KAOtWtg&oe=6A16BBF8",
     badge: "⭐ Premium",
   },
 
@@ -150,7 +150,7 @@ export const products = [
     price: 18000,
     desc: "Docena de empanadas jugosas de carne picada especiada, receta casera tradicional",
     ingredients: ["12 Empanadas de Carne", "Carne picada especiada", "Cebolla", "Morrón", "Huevo duro"],
-    img: "https://images.pexels.com/photos/6287525/pexels-photo-6287525.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://scontent.ffma3-1.fna.fbcdn.net/v/t39.84726-6/633931684_1912405669368859_256283794216069635_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=92e707&_nc_eui2=AeG7pfeLY4_pnxQxOK-WHwM5mtvecPmsM0ya295w-awzTEZzPjHoWs5oqQHgz8aYzDBTF5UOctbIoSXL1yhCa1t6&_nc_ohc=MpNc2RYiFHQQ7kNvwFbJwrq&_nc_oc=AdqhDQ8sNeqEjdCmFSEoh0VY55QqQSHEa7y3cK2GFYUbg9S7aBYKCu5l3VjTQgcLR_I&_nc_zt=14&_nc_ht=scontent.ffma3-1.fna&_nc_gid=2GjpmyPghWDUnAXLce2tog&_nc_ss=7b2a8&oh=00_Af5_ylTlVC82D0aRSqRDH3SykpnEe0wWUYUbb2tKlHfePQ&oe=6A16CD2F",
     badge: "🥟 12 unidades",
   },
   {
@@ -160,7 +160,7 @@ export const products = [
     price: 20000,
     desc: "Docena de empanadas rellenas de abundante jamón y queso derretido, doradas y crocantes",
     ingredients: ["12 Empanadas de Jamón y Queso", "Jamón", "Queso cremoso"],
-    img: "https://images.pexels.com/photos/6287544/pexels-photo-6287544.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://scontent.ffma3-1.fna.fbcdn.net/v/t39.84726-6/706238178_1480023413165788_270277490177725380_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=92e707&_nc_eui2=AeGXnGfH2XZ7TYYwHIflpngBFo1akxPVghcWjVqTE9WCF4cPJtO75z-3SC-KDRVf5ZeRq1IlEXfZ52DUYfX8F4ge&_nc_ohc=YS5AU8rKamIQ7kNvwGNAHWZ&_nc_oc=AdrUc7W64lCXE1oYanZmxu1UZRrOqflVXy18rHKcuC3vN9Oii8GR3d9FMUFGXSC-Ovc&_nc_zt=14&_nc_ht=scontent.ffma3-1.fna&_nc_gid=a6lWnw7SQ0OwvtYf2ylmIw&_nc_ss=7b2a8&oh=00_Af6IywNXWm63jEVyEwMJTZxrYPyxpZlD8TbWUFjn0sy21A&oe=6A16D26D",
     badge: "⭐ 12 unidades",
   },
 
@@ -172,7 +172,7 @@ export const products = [
     price: 16000,
     desc: "Base de tomate, muzzarella abundante y orégano",
     ingredients: ["Masa artesanal", "Salsa de tomate", "Muzzarella", "Orégano"],
-    img: "https://images.pexels.com/photos/2147491/pexels-photo-2147491.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGwczl4P-5X1lnIfLQ8Rwpfeiv-kBBCodMJQ&s",
   },
   {
     id: 16,
@@ -181,7 +181,7 @@ export const products = [
     price: 18000,
     desc: "Muzzarella y peperoni en doble capa sobre base de tomate",
     ingredients: ["Masa artesanal", "Salsa de tomate", "Muzzarella", "Peperoni"],
-    img: "https://images.pexels.com/photos/4109086/pexels-photo-4109086.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCiW5pVbw2nkJUAWRa2PeHDuIa7ddJIshVeQ&s",
     badge: "🔥 Favorita",
   },
   {
@@ -191,17 +191,17 @@ export const products = [
     price: 16000,
     desc: "Muzzarella, tomate fresco, ajo y albahaca",
     ingredients: ["Masa artesanal", "Salsa de tomate", "Muzzarella", "Tomate fresco", "Ajo", "Albahaca"],
-    img: "https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfdMNplKn5uvA0Y7jNn17JDY41oVhQlwanFA&s",
     badge: "🍕 Clásica",
   },
   {
     id: 18,
     category: "pizzas",
-    name: "Pizza Jamón y Morón",
+    name: "Pizza Jamón y Morron",
     price: 20000,
     desc: "Muzzarella, jamón cocido y morrón asado",
     ingredients: ["Masa artesanal", "Salsa de tomate", "Muzzarella", "Jamón cocido", "Morrón"],
-    img: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://pizzeriaprocacchia.com.ar/wp-content/uploads/2025/08/jamon-ymorrones.webp",
     badge: "💎 Premium",
   },
 
@@ -213,7 +213,7 @@ export const products = [
     price: 4000,
     desc: "Gaseosa Coca-Cola bien fría, presentación de 500 ml",
     ingredients: ["Botella de Coca-Cola 500 ml"],
-    img: "https://images.unsplash.com/photo-1567103472667-6898f3a83cd2?auto=compress&cs=tinysrgb&w=800",
+    img: "https://www.casa-segal.com/wp-content/uploads/2020/03/coca-cola-500cc-almacen-gaseosas-casa-segal-mendoza-600x600.jpg",
   },
   {
     id: 20,
@@ -222,7 +222,7 @@ export const products = [
     price: 4000,
     desc: "Gaseosa Fanta Naranja bien fría, presentación de 500 ml",
     ingredients: ["Botella de Fanta 500 ml"],
-    img: "https://images.unsplash.com/photo-1624517452488-04869289c4ca?auto=compress&cs=tinysrgb&w=800",
+    img: "https://cdn.pedix.app/YplURRBw8TlSwzquto4x/products/1719882175241.png?size=800x800",
   },
   {
     id: 21,
@@ -231,7 +231,7 @@ export const products = [
     price: 4000,
     desc: "Gaseosa Sprite bien fría, presentación de 500 ml",
     ingredients: ["Botella de Sprite 500 ml"],
-    img: "https://images.unsplash.com/photo-1625772291427-59a607b9307f?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdSjvquiWIqiDVkqwzJ9TOOgto3mHrl52_HQ&s",
   },
   {
     id: 22,
@@ -240,7 +240,7 @@ export const products = [
     price: 7000,
     desc: "Gaseosa familiar Coca-Cola, presentación de 1.5 L",
     ingredients: ["Botella de Coca-Cola 1.5 L"],
-    img: "https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=compress&cs=tinysrgb&w=800",
+    img: "https://static.wixstatic.com/media/d2b1c5_d858b74ff2534bdc98694e72c576fbe0~mv2_d_1600_1600_s_2.jpg/v1/fit/w_500,h_500,q_90/file.jpg",
   },
   {
     id: 23,
@@ -249,7 +249,7 @@ export const products = [
     price: 7000,
     desc: "Gaseosa familiar Fanta Naranja, presentación de 1.5 L",
     ingredients: ["Botella de Fanta 1.5 L"],
-    img: "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?auto=compress&cs=tinysrgb&w=800",
+    img: "https://www.rimoldimayorista.com.ar/datos/uploads/mod_catalogo/31308/fanta-1-5lts-6093d9c16b833.png",
   },
   {
     id: 24,
@@ -258,25 +258,25 @@ export const products = [
     price: 7000,
     desc: "Gaseosa familiar Sprite, presentación de 1.5 L",
     ingredients: ["Botella de Sprite 1.5 L"],
-    img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=compress&cs=tinysrgb&w=800",
+    img: "https://jumboargentina.vtexassets.com/arquivos/ids/783978/Gaseosa-Sprite-Lima-lim-n-1-5-L-2-248096.jpg?v=638215869672330000",
   },
   {
     id: 37,
     category: "bebidas",
-    name: "Acularius 500ml",
+    name: "Aquarius 500ml",
     price: 4000,
     desc: "Agua saborizada Acularius bien fría, botella 500 ml",
     ingredients: ["Acularius 500 ml"],
-    img: "https://images.unsplash.com/photo-1548964887-a221db3fb17b?auto=compress&cs=tinysrgb&w=800",
+    img: "https://acdn-us.mitiendanube.com/stores/001/144/045/products/aquarius-pomelo1-87ad33c3cdefd55aa716377009162693-640-0.webp",
   },
   {
     id: 38,
     category: "bebidas",
-    name: "Acularius 1.5L",
+    name: "Aquarius 1.5L",
     price: 6000,
     desc: "Agua saborizada Acularius familiar, botella 1.5 L",
     ingredients: ["Acularius 1.5 L"],
-    img: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=compress&cs=tinysrgb&w=800",
+    img: "https://jumboargentina.vtexassets.com/arquivos/ids/782891-800-600?v=638206690043070000&width=800&height=600&aspect=true",
   },
   {
     id: 39,
@@ -285,7 +285,7 @@ export const products = [
     price: 3000,
     desc: "Agua mineral sin gas purificada, bien fría, botella 500 ml",
     ingredients: ["Agua mineral sin gas 500 ml"],
-    img: "https://images.unsplash.com/photo-1608885898957-a599fb18ec3b?auto=compress&cs=tinysrgb&w=800",
+    img: "https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3040004_f.jpg",
   },
   {
     id: 40,
@@ -294,86 +294,41 @@ export const products = [
     price: 4000,
     desc: "Agua mineral sin gas purificada familiar, botellón 2 L",
     ingredients: ["Agua mineral sin gas 2 L"],
-    img: "https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6a3Ao2ucLYdd8fHvdh_ZzDoWX-2HWaQaO7A&s",
   },
   {
     id: 41,
     category: "bebidas",
-    name: "Coca-Cola 1L (Vidrio)",
+    name: "Coca-Cola 1L",
     price: 5000,
     desc: "Gaseosa Coca-Cola 1 litro en envase de vidrio retornable",
     ingredients: ["Botella de vidrio retornable de Coca-Cola 1 L"],
-    img: "https://images.unsplash.com/photo-1567103472667-6898f3a83cd2?auto=compress&cs=tinysrgb&w=800",
-    badge: "♻️ Retornable",
+    img: "https://www.distribuidoralaflia.com.ar/wp-content/uploads/2022/08/WhatsApp-Image-2022-08-09-at-11.20.35-AM.jpeg",
+
   },
   {
     id: 42,
     category: "bebidas",
-    name: "Fanta 1L (Vidrio)",
+    name: "Fanta 1L",
     price: 5000,
     desc: "Gaseosa Fanta Naranja 1 litro en envase de vidrio retornable",
     ingredients: ["Botella de vidrio retornable de Fanta 1 L"],
-    img: "https://images.unsplash.com/photo-1624517452488-04869289c4ca?auto=compress&cs=tinysrgb&w=800",
-    badge: "♻️ Retornable",
+    img: "https://bicomfiles.s3-sa-east-1.amazonaws.com/ecommerce/1690/1690236403.png",
   },
   {
     id: 43,
     category: "bebidas",
-    name: "Sprite 1L (Vidrio)",
+    name: "Sprite 1L",
     price: 5000,
     desc: "Gaseosa Sprite 1 litro en envase de vidrio retornable",
     ingredients: ["Botella de vidrio retornable de Sprite 1 L"],
-    img: "https://images.unsplash.com/photo-1625772291427-59a607b9307f?auto=compress&cs=tinysrgb&w=800",
-    badge: "♻️ Retornable",
-  },
-  {
-    id: 44,
-    category: "bebidas",
-    name: "Coca-Cola 1L (Descartable)",
-    price: 6000,
-    desc: "Gaseosa Coca-Cola 1 litro en botella de plástico descartable",
-    ingredients: ["Botella descartable de Coca-Cola 1 L"],
-    img: "https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 45,
-    category: "bebidas",
-    name: "Fanta 1L (Descartable)",
-    price: 6000,
-    desc: "Gaseosa Fanta Naranja 1 litro en botella de plástico descartable",
-    ingredients: ["Botella descartable de Fanta 1 L"],
-    img: "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 46,
-    category: "bebidas",
-    name: "Sprite 1L (Descartable)",
-    price: 6000,
-    desc: "Gaseosa Sprite 1 litro en botella de plástico descartable",
-    ingredients: ["Botella descartable de Sprite 1 L"],
-    img: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 47,
-    category: "bebidas",
-    name: "Fanta Pomelo 500ml",
-    price: 4000,
-    desc: "Gaseosa Fanta sabor Pomelo bien fría, presentación de 500 ml",
-    ingredients: ["Botella de Fanta Pomelo 500 ml"],
-    img: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 48,
-    category: "bebidas",
-    name: "Fanta Pomelo 2L",
-    price: 6000,
-    desc: "Gaseosa familiar Fanta sabor Pomelo, botella de 2 litros",
-    ingredients: ["Botella familiar de Fanta Pomelo 2 L"],
-    img: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=compress&cs=tinysrgb&w=800",
-    badge: "🍊 Familiar",
+    img: "https://super22deoctubre.com.ar/wp-content/uploads/2020/07/Sprite-Retornable-Vidrio-X1.25Lt.jpg",
   },
 
-  // ── CERVEZAS ──────────────────────────────────────────────────
+
+
+
+  // ── CRVEZAS ──────────────────────────────────────────────────
   {
     id: 25,
     category: "cervezas",
@@ -382,7 +337,6 @@ export const products = [
     desc: "Heineken lager premium importada, botella 710 ml",
     ingredients: ["Heineken 710 ml"],
     img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=compress&cs=tinysrgb&w=800",
-    badge: "🌿 Importada",
   },
   {
     id: 26,
@@ -400,7 +354,7 @@ export const products = [
     price: 7000,
     desc: "Cerveza Brahma rubia y refrescante, botella de 1 litro",
     ingredients: ["Brahma 1 L"],
-    img: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?auto=compress&cs=tinysrgb&w=800",
+    img: "https://masonlineprod.vtexassets.com/arquivos/ids/292127/Cerveza-Brahma-Chopp-Retornable-1-L-2-5506.jpg?v=639009846305970000",
   },
   {
     id: 28,
@@ -409,7 +363,7 @@ export const products = [
     price: 8000,
     desc: "Miller Genuine Draft suave, botella de 1 litro",
     ingredients: ["Miller 1 L"],
-    img: "https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?auto=compress&cs=tinysrgb&w=800",
+    img: "https://images.pricely.ar/images/1/7793147573485.webp",
   },
   {
     id: 29,
@@ -418,8 +372,7 @@ export const products = [
     price: 10000,
     desc: "Corona Extra bien fría, clásica con gajos de limón",
     ingredients: ["Corona 710 ml"],
-    img: "https://images.unsplash.com/photo-1558642084-fd07fae5282e?auto=compress&cs=tinysrgb&w=800",
-    badge: "🍋 Con limón",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfOypxYNdWcIa2-izKhcnzjb9VcLCSWQBw7A&s",
   },
   {
     id: 30,
@@ -428,7 +381,7 @@ export const products = [
     price: 8000,
     desc: "Cerveza Sol dorada y suave, botella de 710 ml",
     ingredients: ["Sol 710 ml"],
-    img: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAiGswPxPfxGG0vqlXCUlR-dw2r-IbusTwkQ&s",
   },
 
   // ── TRAGOS ────────────────────────────────────────────────────
@@ -439,8 +392,7 @@ export const products = [
     price: 8000,
     desc: "Daikiri frozen de frutilla, dulce y refrescante",
     ingredients: ["Ron blanco", "Frutilla natural", "Jugo de limón", "Azúcar", "Hielo"],
-    img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=compress&cs=tinysrgb&w=800",
-    badge: "🍓 Frozen",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKnd8N7mEq7IteqqftQBhNXXk8paffYpNaCQ&s",
   },
   {
     id: 32,
@@ -449,8 +401,7 @@ export const products = [
     price: 8000,
     desc: "Daikiri frozen de durazno, suave y tropical",
     ingredients: ["Ron blanco", "Durazno natural", "Jugo de limón", "Azúcar", "Hielo"],
-    img: "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=compress&cs=tinysrgb&w=800",
-    badge: "🍑 Frozen",
+    img: "https://cdn0.recetasgratis.net/es/posts/1/2/3/daiquiri_de_durazno_73321_orig.jpg",
   },
   {
     id: 33,
@@ -459,7 +410,7 @@ export const products = [
     price: 7000,
     desc: "Fernet Branca con Coca-Cola bien fría",
     ingredients: ["Fernet Branca", "Coca-Cola", "Hielo"],
-    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpia6fu3m0noI523eP_McaZfut7NrA5UvnRg&s",
     badge: "🇦🇷 Nacional",
   },
 
@@ -471,7 +422,7 @@ export const products = [
     price: 6000,
     desc: "Frutillas frescas licuadas con agua y azúcar al gusto",
     ingredients: ["Frutillas frescas", "Agua fría", "Azúcar al gusto", "Hielo"],
-    img: "https://images.pexels.com/photos/1028637/pexels-photo-1028637.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWb8q5PGRJ85VBqk3ZKMw-Byx6lO3XRzgwXg&s",
   },
   {
     id: 35,
@@ -480,7 +431,7 @@ export const products = [
     price: 7000,
     desc: "Frutillas frescas licuadas con leche entera cremosa",
     ingredients: ["Frutillas frescas", "Leche entera", "Azúcar al gusto"],
-    img: "https://images.pexels.com/photos/3625372/pexels-photo-3625372.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://i.ytimg.com/vi/wXnSmXTNGEM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCpMN-pAg_CujfhsGMnj8NKCt9kDg",
     badge: "🍓 Cremoso",
   },
   {
@@ -490,7 +441,7 @@ export const products = [
     price: 7000,
     desc: "Duraznos frescos licuados con leche entera",
     ingredients: ["Duraznos frescos", "Leche entera", "Azúcar al gusto"],
-    img: "https://images.pexels.com/photos/3625578/pexels-photo-3625578.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmnddKbFRpnKJcdAwAb1MXnhMiZ8h2JbnxDA&s",
     badge: "🍑 Con Leche",
   },
   {
@@ -500,6 +451,6 @@ export const products = [
     price: 6000,
     desc: "Duraznos frescos licuados con agua y azúcar al gusto",
     ingredients: ["Duraznos frescos", "Agua fría", "Azúcar al gusto", "Hielo"],
-    img: "https://images.pexels.com/photos/1028637/pexels-photo-1028637.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmnddKbFRpnKJcdAwAb1MXnhMiZ8h2JbnxDA&s",
   },
 ];

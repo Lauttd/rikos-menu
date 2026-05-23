@@ -122,14 +122,14 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
       />
 
       <motion.div
-        className="relative z-[401] w-full max-w-[min(520px,100vw)] max-h-[min(92vh,840px)] flex flex-col bg-bg rounded-t-[22px] sm:rounded-2xl shadow-[0_-8px_40px_rgba(0,0,0,0.18)] sm:shadow-[0_20px_60px_rgba(0,0,0,0.25)] overflow-hidden border border-black/[0.06]"
+        className="relative z-[401] w-full max-w-[min(580px,100vw)] max-h-[min(88vh,720px)] flex flex-col bg-bg rounded-t-[22px] sm:rounded-2xl shadow-[0_-8px_40px_rgba(0,0,0,0.18)] sm:shadow-[0_20px_60px_rgba(0,0,0,0.25)] overflow-hidden border border-black/[0.06]"
         initial={{ opacity: 0, scale: 0.9, y: 28 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.94, y: 20 }}
         transition={{ type: "spring", damping: 26, stiffness: 320 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative shrink-0 aspect-[16/10] bg-bg-card overflow-hidden">
+        <div className="relative shrink-0 aspect-[3/2] sm:aspect-[3/2] md:aspect-[14/9] max-h-[150px] sm:max-h-[190px] md:max-h-[220px] bg-bg-card overflow-hidden">
           <ProductImage src={product.img} alt={product.name} className="w-full h-full object-cover" />
           <button
             type="button"
@@ -151,20 +151,20 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
           )}
         </div>
 
-        <div className="flex-1 overflow-y-auto overscroll-contain px-4 pt-4 pb-[calc(env(safe-area-inset-bottom)+20px)] sm:pb-6">
+        <div className="flex-1 overflow-y-auto overscroll-contain px-4 pt-4 pb-[calc(env(safe-area-inset-bottom)+26px)] sm:px-5 sm:pt-5 sm:pb-6">
           <div className="flex items-start justify-between gap-3 mb-3">
             <h2
               id="product-detail-title"
-              className="font-playfair text-[1.35rem] sm:text-[1.55rem] font-extrabold text-dark leading-tight m-0"
+              className="font-playfair text-[1.05rem] sm:text-[1.25rem] font-extrabold text-dark leading-tight m-0"
             >
               {product.name}
             </h2>
-            <p className="m-0 shrink-0 text-[1.35rem] font-extrabold text-brand font-playfair whitespace-nowrap">
+            <p className="m-0 shrink-0 text-[1.05rem] font-extrabold text-brand font-playfair whitespace-nowrap">
               {formatArs(product.price)}
             </p>
           </div>
 
-          <p className="text-[14px] text-[#666] leading-relaxed mb-5">{product.desc}</p>
+          <p className="text-[13px] text-[#666] leading-relaxed mb-5">{product.desc}</p>
 
           {soldOut && (
             <div className="mb-5 rounded-2xl border-2 border-[#ccc] bg-white px-4 py-3 text-center">
@@ -179,7 +179,7 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
             <h3 className="text-[13px] font-bold uppercase tracking-wide text-brand mb-2.5">
               Ingredientes
             </h3>
-            <ul className="list-disc pl-5 text-[15px] text-dark space-y-1.5 m-0">
+            <ul className="list-disc pl-5 text-[14px] text-dark space-y-1.5 m-0">
                 {ingredients.map((item, idx) => (
                   <li key={`${idx}-${item}`}>{item}</li>
                 ))}
@@ -196,13 +196,13 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
                 return (
                   <label
                     key={b.id}
-                    className={`flex items-center justify-between gap-3 min-h-[46px] px-3 py-2 rounded-xl border-2 transition-colors ${
+                    className={`flex items-center justify-between gap-3 min-h-[48px] px-4 py-3 rounded-2xl border-2 transition-colors duration-200 ${
                       soldOut
                         ? "cursor-not-allowed opacity-55 border-black/[0.06] bg-bg-card"
                         : `cursor-pointer ${
                             checked
                               ? "border-brand bg-brand/[0.08] bg-white"
-                              : "border-black/[0.04] bg-white active:bg-bg-card"
+                              : "border-black/[0.04] bg-white hover:border-brand hover:bg-brand/[0.04]"
                           }`
                     }`}
                   >
@@ -213,9 +213,9 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
                         onChange={() => toggleBebida(b.id)}
                         className="w-4.5 h-4.5 shrink-0 accent-brand rounded"
                       />
-                      <span className="text-[13.5px] font-semibold text-dark truncate">{b.label}</span>
+                      <span className="text-[13px] font-semibold text-dark truncate">{b.label}</span>
                     </span>
-                    <span className="text-[13px] font-bold text-brand shrink-0">{formatArs(b.price)}</span>
+                    <span className="text-[12.5px] font-bold text-brand shrink-0">{formatArs(b.price)}</span>
                   </label>
                 );
               })}
@@ -232,13 +232,13 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
                 return (
                   <label
                     key={ex.id}
-                    className={`flex items-center justify-between gap-3 min-h-[46px] px-4 py-2.5 rounded-2xl border-2 transition-colors ${
+                    className={`flex items-center justify-between gap-3 min-h-[48px] px-4 py-3 rounded-2xl border-2 transition-colors duration-200 ${
                       soldOut
                         ? "cursor-not-allowed opacity-55 border-black/[0.06] bg-bg-card"
                         : `cursor-pointer ${
                             checked
                               ? "border-brand bg-brand/[0.08]"
-                              : "border-black/[0.08] bg-white active:bg-bg-card"
+                              : "border-black/[0.08] bg-white hover:border-brand hover:bg-brand/[0.04]"
                           }`
                     }`}
                   >
@@ -249,9 +249,9 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
                         onChange={() => toggleExtra(ex.id)}
                         className="w-5 h-5 shrink-0 accent-brand rounded"
                       />
-                      <span className="text-[14px] font-semibold text-dark truncate">{ex.label}</span>
+                      <span className="text-[13px] font-semibold text-dark truncate">{ex.label}</span>
                     </span>
-                    <span className="text-[13.5px] font-bold text-brand shrink-0">{formatArs(ex.price)}</span>
+                    <span className="text-[12.5px] font-bold text-brand shrink-0">{formatArs(ex.price)}</span>
                   </label>
                 );
               })}
@@ -266,12 +266,12 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
               {deliveryMethods.map((m) => (
                 <label
                   key={m.id}
-                  className={`flex-1 flex items-center gap-3 min-h-[52px] px-4 rounded-2xl border-2 ${
+                  className={`flex-1 flex items-center gap-3 min-h-[58px] px-4 py-3 rounded-2xl border-2 ${
                     soldOut ? "cursor-not-allowed opacity-55" : "cursor-pointer"
                   } ${
                     delivery === m.id
                       ? "border-brand bg-brand/[0.08]"
-                      : "border-black/[0.08] bg-white"
+                      : "border-black/[0.08] bg-white hover:border-brand hover:bg-brand/[0.04]"
                   }`}
                 >
                   <input
@@ -281,7 +281,7 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
                     checked={delivery === m.id}
                     onChange={() => setDelivery(m.id)}
                   />
-                  <span className="text-[14px] font-semibold text-dark leading-tight">
+                  <span className="text-[13px] font-semibold text-dark leading-tight">
                     {m.id === "pickup" ? "🏠" : "🛵"} {m.label}
                   </span>
                 </label>
@@ -302,7 +302,7 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
                   placeholder="Ej: 5 o 12"
                   value={tableNumber}
                   onChange={(e) => setTableNumber(e.target.value)}
-                  className="w-full h-11 px-4 rounded-xl border border-black/[0.12] bg-white text-[15px] focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand font-medium placeholder:text-[#aaa]"
+                  className="w-full h-11 px-4 rounded-xl border border-black/[0.12] bg-white text-[14px] focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand font-medium placeholder:text-[#aaa]"
                   required
                 />
                 <p className="mt-1.5 text-[11px] text-[#777] px-1">
@@ -314,12 +314,12 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
 
           <div className="sticky bottom-0 -mx-4 px-4 pt-3 pb-2 bg-gradient-to-t from-bg from-85% to-transparent">
             <div className="flex items-center justify-between mb-3 px-1">
-              <span className="text-[14px] font-bold text-[#555] uppercase tracking-wide">
+              <span className="text-[13px] font-bold text-[#555] uppercase tracking-wide">
                 {soldOut ? "Precio (referencia)" : "Total"}
               </span>
               <motion.span
                 key={soldOut ? "out" : grandTotal}
-                className={`text-[1.65rem] font-extrabold font-playfair ${soldOut ? "text-[#777]" : "text-dark"}`}
+                className={`text-[1.4rem] font-extrabold font-playfair ${soldOut ? "text-[#777]" : "text-dark"}`}
                 initial={{ scale: 0.96 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 500, damping: 28 }}
@@ -332,7 +332,7 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
               type="button"
               disabled={!canConfirm}
               onClick={confirmWhatsApp}
-              className={`w-full min-h-[54px] border-none rounded-2xl text-[17px] font-bold transition-all duration-200 ${
+              className={`w-full min-h-[54px] border-none rounded-2xl text-[15px] font-bold transition-all duration-200 ${
                 !canConfirm
                   ? "bg-[#d6d6d6] text-[#888] cursor-not-allowed shadow-none active:scale-100"
                   : "brand-gradient text-white cursor-pointer shadow-[0_8px_24px_rgba(255,75,31,0.4)] active:scale-[0.98]"
