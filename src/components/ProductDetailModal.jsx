@@ -75,14 +75,16 @@ export default function ProductDetailModal({ product, onClose, whatsappNumber })
       `----------------------------------`,
       `*Producto:* ${productQty}x ${product.name} (${formatArs(product.price)})`,
       `*Ingredientes:* ${ingredients.join(", ")}`,
-      `*Bebidas extra:* ${bebidasLine}`,
-      `*Papas extra:* ${extrasLine}`,
+    ];
+    if (selectedBebidasLabels.length > 0) lines.push(`*Bebidas extra:* ${bebidasLine}`);
+    if (selectedExtrasLabels.length > 0) lines.push(`*Papas extra:* ${extrasLine}`);
+    lines.push(
       delivery === "pickup"
         ? `*Método de Entrega:* Retiro en el local (Mesa N° ${tableNumber.trim()})`
-        : `*Método de Entrega:* Envío a domicilio`,
-      `----------------------------------`,
-      `*TOTAL A PAGAR:* ${formatArs(grandTotal)}`,
-    ];
+        : `*Método de Entrega:* Envío a domicilio`
+    );
+    lines.push(`----------------------------------`);
+    lines.push(`*TOTAL A PAGAR:* ${formatArs(grandTotal)}`);
     const text = lines.join("\n");
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
     onClose();
