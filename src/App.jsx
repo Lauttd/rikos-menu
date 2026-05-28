@@ -8,7 +8,7 @@ import ProductDetailModal from "./components/ProductDetailModal";
 import Footer from "./components/Footer";
 import { products, categories } from "./data/products";
 
-const WHATSAPP_NUMBER = "5493704690447";
+const WHATSAPP_NUMBER = "5493704813873";
 const BUSINESS_NAME = "Riko's";
 
 export default function App() {
